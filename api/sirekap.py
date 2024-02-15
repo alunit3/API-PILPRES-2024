@@ -27,6 +27,15 @@ async def get_data():
             paslon_2 = obj['chart'].get('100026')
             paslon_3 = obj['chart'].get('100027')
             percentage = obj['chart'].get('persen')
+            tps_total = obj['progres']['total']
+            tps_done = obj['progres']['progres']
+                        
+            if tps_total and tps_done:
+                    tps_percentage = (float(tps_done) / float(tps_total)) * 100
+                    tps_percentage = f"{tps_percentage:.2f}%"
+            else:
+                tps_percentage = "0.00%"
+
 
             wilayah_data = []
             
@@ -52,5 +61,10 @@ async def get_data():
                 'paslon_2': paslon_2,
                 'paslon_3': paslon_3,
                 'percentage': percentage,
-                'wilayah_data': wilayah_data
+                'wilayah_data': wilayah_data,
+                'progress': {
+                    'total': tps_total,
+                    'done': tps_done,
+                    'percentage': tps_percentage
+                }
             }
